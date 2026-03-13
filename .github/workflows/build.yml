@@ -1,6 +1,12 @@
 name: build-php-ndk
 
 on:
+  workflow_dispatch:
+    inputs:
+      php_version:
+        description: "PHP version"
+        default: "8.3"
+        
   push:
     branches: [ "master" ]
   pull_request:
