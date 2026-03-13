@@ -28,5 +28,5 @@ jobs:
     - name: Upload built libraries 
       uses: actions/upload-artifact@v4 
       with: 
-        name: php-android-libs 
-        path: build
+        name: build
+        path: .
