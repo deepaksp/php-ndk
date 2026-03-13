@@ -25,16 +25,20 @@ jobs:
     - name: Build PHP for Android 
       run: make 
 
-    - name: Copy build output
-      run: |
-        mkdir -p build
-        docker cp $(docker ps -alq):/workspace/build ./build || true
-
-    - name: Show build files
-      run: ls -R build
-  
+    - name: Build PHP for Android 
+      run: make 
+      
+    - name: Find built libraries 
+      run: | 
+        echo "Searching for .so files..." find . -name "*.so" 
+    
+    - name: Collect libraries 
+      run: | 
+        mkdir -p artifacts 
+        find . -name "*.so" -exec cp {} artifacts/ \; 
+    
     - name: Upload built libraries 
       uses: actions/upload-artifact@v4 
       with: 
-        name: build
-        path: .
+        name: php-android-libs 
+        path: artifacts
