@@ -11,32 +11,25 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
+    steps:      
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Install dependencies 
-      run: | 
-        sudo apt-get update
-        sudo apt-get install -y make
-      
-    - name: Start Docker 
-      run: sudo systemctl start docker 
-      
-    - name: Build PHP for Android 
-      run: make 
+      - name: Set Git identity
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
-      
-    - name: Find built libraries 
-      run: | 
-        echo "Searching for .so files..." find . -name "*.so" 
-    
-    - name: Collect libraries 
-      run: | 
-        mkdir -p artifacts 
-        find . -name "*.so" -exec cp {} artifacts/ \; 
-    
-    - name: Upload built libraries 
-      uses: actions/upload-artifact@v4 
-      with: 
-        name: php-android-libs 
-        path: artifacts
+      - name: Run Makefile
+        run: |
+          make DESTDIR=.
+
+      - name: Show generated files
+        run: |
+          ls -R
+
+      - name: Commit generated files
+        run: |
+          git add app/ || true
+          git commit -m "Auto build PHP NDK libraries" || echo "No changes to commit"
+          git push    
