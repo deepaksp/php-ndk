@@ -58,6 +58,7 @@ RUN ../php-${PHP_VERSION}/configure \
   --disable-phpdbg \
   --with-sqlite3 \
   --with-pdo-sqlite \
+  --enable-embed \
   ;
 
 RUN \
