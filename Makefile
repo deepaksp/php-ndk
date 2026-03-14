@@ -1,7 +1,7 @@
 # Usage: make DESTDIR=/binary/installation/path
 DESTDIR=.
-EABI_PLATFORMS=armv7a
-NOABI_PLATFORMS=aarch64 i686 riscv64 x86_64
+EABI_PLATFORMS=aarch64
+NOABI_PLATFORMS=aarch64
 PLATFORMS=$(EABI_PLATFORMS) $(NOABI_PLATFORMS)
 INSTALL_PLATFORMS=$(foreach platform,$(PLATFORMS),install-$(platform))
 LIBDIR_PATH=app/src/main/jniLibs/
@@ -16,7 +16,7 @@ ENABLES_INSTALLS=$(foreach platform,$(ENABLED_PLATFORMS),install-$(platform))
 
 PHP_VERSION=8.4.2
 PATCHLEVEL=1
-API_LEVEL=32
+API_LEVEL=35
 IMAGE_NAME=php-ndk
 
 all: $(ENABLED_PLATFORMS)
