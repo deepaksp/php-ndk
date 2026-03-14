@@ -12,19 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:      
-      - uses: actions/checkout@v4
+
+        - uses: actions/checkout@v4
     
-      - name: Build PHP Android libraries
-        run: make
+        - name: Build docker images
+          run: make
     
-      - name: Show generated files
-        run: ls -R
+        - name: Extract libraries
+          run: make install DESTDIR=build
     
-      - name: Commit libraries
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-    
-          git add *
-          git commit -m "Auto build PHP NDK libraries" || echo "Nothing to commit"
-          git push
+        - name: Upload artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: php-android
+            path: build/
