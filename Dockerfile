@@ -74,7 +74,7 @@ ARG LIBDIR
 ENV LIBDIR ${LIBDIR}
 COPY --from=buildsystem /root/install/* /app/src/main/jniLibs/${LIBDIR}/
 COPY --from=buildsystem /root/build/sapi/* /app/src/main/jniLibF/${LIBDIR}/
-COPY --from=buildsystem /root/sqlite-amalgamation-${SQLITE3_VERSION}/* /app/src/main/jniLibSQL/${LIBDIR}/
+#COPY --from=buildsystem /root/sqlite-amalgamation-${SQLITE3_VERSION}/* /app/src/main/jniLibSQL/${LIBDIR}/
 
 
 
