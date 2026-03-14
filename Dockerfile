@@ -107,7 +107,7 @@ RUN make install DESTDIR=/root/install
 # Copy sqlite
 ########################
 
-RUN cp /root/sqlite-amalgamation-${SQLITE3_VERSION}/libsqlite3.so /root/install/libsqlite3.so
+#RUN cp /root/sqlite-amalgamation-${SQLITE3_VERSION}/libsqlite3.so /root/install/libsqlite3.so
 
 ########################
 # Final image
@@ -119,8 +119,8 @@ ARG LIBDIR
 ENV LIBDIR=${LIBDIR}
 
 # PHP runtime libraries
-RUN cp /root/build/sapi/cli/php /root/install/php.so
-RUN cp /root/sqlite-amalgamation-${SQLITE3_VERSION}/libsqlite3.so /root/install/libsqlite3.so
+#RUN cp /root/build/sapi/cli/php /root/install/php.so
+#RUN cp /root/sqlite-amalgamation-${SQLITE3_VERSION}/libsqlite3.so /root/install/libsqlite3.so
 
 # PHP headers for JNI builds
 COPY --from=buildsystem /root/install/* /app/src/main/jniLibs/${LIBDIR}/
