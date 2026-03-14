@@ -1,7 +1,7 @@
 # Usage: make DESTDIR=/binary/installation/path
 DESTDIR=.
-EABI_PLATFORMS=aarch64
-NOABI_PLATFORMS=aarch64
+EABI_PLATFORMS=armv7a
+NOABI_PLATFORMS=aarch64 i686 riscv64 x86_64
 PLATFORMS=$(EABI_PLATFORMS) $(NOABI_PLATFORMS)
 INSTALL_PLATFORMS=$(foreach platform,$(PLATFORMS),install-$(platform))
 LIBDIR_PATH=app/src/main/jniLibs/
