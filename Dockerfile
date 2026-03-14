@@ -1,17 +1,15 @@
 FROM alpine:3.21 as buildsystem
 
-RUN apk update && apk add \
-    wget unzip gcompat libgcc bash patch make curl build-base
+RUN apk update
+RUN apk add wget unzip gcompat libgcc bash patch make curl
 
 WORKDIR /opt
 
 ENV NDK_VERSION android-ndk-r27c-linux
 
-RUN wget https://dl.google.com/android/repository/${NDK_VERSION}.zip \
- && unzip ${NDK_VERSION}.zip \
- && rm ${NDK_VERSION}.zip
+RUN wget https://dl.google.com/android/repository/${NDK_VERSION}.zip && unzip ${NDK_VERSION}.zip && rm ${NDK_VERSION}.zip
 
-ENV PATH="$PATH:/opt/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin"
+ENV PATH="$PATH:/opt/android-ndk-r27c/:/opt/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
 WORKDIR /root
 
@@ -33,9 +31,7 @@ RUN unzip sqlite-amalgamation-${SQLITE3_VERSION}.zip
 
 WORKDIR /root/sqlite-amalgamation-${SQLITE3_VERSION}
 
-RUN ${TARGET}-clang \
-    -shared -fPIC sqlite3.c \
-    -o libsqlite3.so
+RUN ${TARGET}-clang -o libsqlite3.so -shared -fPIC sqlite3.c
 
 ########################
 # Download PHP
