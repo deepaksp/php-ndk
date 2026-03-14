@@ -14,7 +14,7 @@ WORKDIR /root
 ##########
 # CONFIG #
 ##########
-ARG TARGET=aarch64-linux-android-clang
+ARG TARGET=armv7a-linux-androideabi
 ARG PHP_VERSION=8.4.2
 
 ENV SQLITE3_VERSION 3470200
